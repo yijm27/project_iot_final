@@ -40,10 +40,12 @@ $(document).on('click', '.toggleBG', function () {
 	    const left_px = parseInt( $('#'+toggleBtnId).css('left') );
 	    //return (left_px > 0)? "on" : "off";
 	    if(left_px > 0){
+	    	autoStop()
 	    	$(".button_menual1").hide();
 	    	$(".button_menual2").show();
 	    }else{
 	    	//text_data = $(".button_menual").html()
+	    	autoStart()
 	    	$(".button_menual2").hide();
 	    	$(".button_menual1").show();
 	    };		

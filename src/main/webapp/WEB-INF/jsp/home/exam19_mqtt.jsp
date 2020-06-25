@@ -818,7 +818,16 @@ function answer(){
 					<div class="toggleBG text-left">
                       <button id="buttonID" class='toggleFG' onclick="getToggleBtnState('buttonID')"></button>
                  	</div>
-					
+					<div class="row bg-dark">
+				<div id = "button_state_mode">
+							<div class="button_menual1" style="display: none;">		
+										<p>수동 주행 중<p><br>
+							</div>
+							<div class="button_menual2">
+										<p>자율 주행 중</p><br>
+							</div>
+						</div>
+					</div>
 				</div>
 				
 				<!-- <div class="col-sm-2 card bg-light">
@@ -858,22 +867,6 @@ function answer(){
                         </div>
                   </div>
              	</div>
-			</div>
-			
-			
-			
-			<div class="row bg-dark">
-				<div id = "button_state_mode">
-						<div class="button_menual1" style="display: none;">		
-									<p>수동 주행 메뉴얼<p><br>
-									<p>1. 키보드 상하좌우 = 차의 이동</p>	
-						</div>
-						<div class="button_menual2">
-									<p>자율 주행 메뉴얼</p><br>
-									<p>1. 거리가 10 이하가 되면 운행을 중지하고 뒤로 갑니다<br>
-									<p>2. 이후 추가 바람.</p><br>
-						</div>
-					</div>
 			</div>
 		</div>	
 			
