@@ -270,10 +270,9 @@
 					
 					//$("#cameraView").attr("src", "data:image/jpg;base64," +message.payloadString);
 					$("#cameraView").attr("style","background-image: url(data:image/jpg;base64," + message.payloadString + ");background-repeat: no-repeat;background-size: 100%;"); /* ;background-repeat: no-repeat;background-size: 100%" */
-					if(cameraFlag == true){
 					
-						cameraCapture(message.payloadString);
-					}
+					
+
 				}
 				if(message.destinationName == "/temperature_photo"){
 					//가정  {"temperature": 값, "gas":값}
@@ -380,9 +379,10 @@
 		</script>
 		
 		<script type="text/javascript"> // 데이터 저장: 이미지 캡처
-			function cameraCapture(camera_message_data) {
+			function cameraCapture_database() {
 				console.log("카메라 캡처")
-					cameraCapture = camera_message_data;
+					cameraCapture = $('#cameraview')
+					console.log(cameraCapture)
 					$.ajax({
 						url: "cameraCapture.do",
 					
@@ -396,7 +396,6 @@
 				};
 			
 		</script>
-		
 		
 		
 		<script>
@@ -719,7 +718,7 @@
 					        </div>
 					        <div>
 					           <p style="width:100px;" align="center" > 캡처
-					           <input class="btn btn-outline-primary" onclick="ca" type="button" value="buzzerOn" />
+					           <input class="btn btn-outline-primary" onclick="cameraCapture_database()" type="button" value="cameraCapture" />
 					           
 					           </p>
 					        </div>

@@ -91,7 +91,7 @@ $(function() {
 		}));
 
 		// The RPM gauge
-		var chartRpm = Highcharts.chart('container-rpm', Highcharts.merge(gaugeOptions, {
+		/*var chartRpm = Highcharts.chart('container-rpm', Highcharts.merge(gaugeOptions, {
 		    yAxis: {
 		        min: 'null',
 		        max: 'null',
@@ -117,7 +117,7 @@ $(function() {
 		        }
 		    }]
 
-		}));
+		}));*/
 
 		// Bring life to the dials
 		setInterval(function () {
@@ -133,7 +133,7 @@ $(function() {
 		    }
 
 		    // RPM
-		    if (chartRpm) {
+		    /*if (chartRpm) {
 		        point = chartRpm.series[0].points[0];
 		        inc = Math.random() - 0.5;
 		        newVal = point.y + inc;
@@ -143,6 +143,6 @@ $(function() {
 		        }
 
 		        point.update(newVal);
-		    }
+		    }*/
 		}, 2000);
 });	

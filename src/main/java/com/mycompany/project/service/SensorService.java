@@ -22,6 +22,7 @@ public class SensorService {
 	
 	public void cameraWrite(String cameraByte) {
 		LOGGER.info("실행");
+		System.out.print(cameraByte);
 		sensorDao.insert(cameraByte);
 	}
 
