@@ -17,4 +17,10 @@ public class SensorDao extends EgovAbstractMapper{
 		int rows = insert("sensor.insert", sensor);
 		return rows;
 	}
+	
+	public int camerainsert(String cameraByte) {
+		LOGGER.info("실행");
+		int rows = insert("sensor.camera_insert", cameraByte);
+		return rows;
+	}
 }

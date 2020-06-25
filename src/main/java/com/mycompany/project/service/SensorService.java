@@ -19,6 +19,11 @@ public class SensorService {
 		LOGGER.info("실행");
 		sensorDao.insert(sensor);
 	}
+	
+	public void cameraWrite(String value) {
+		LOGGER.info("실행");
+		sensorDao.insert(value);
+	}
 
 	
 }

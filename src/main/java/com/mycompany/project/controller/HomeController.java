@@ -63,6 +63,23 @@ public class HomeController {
 	
 	}
 	
+	@RequestMapping("/cameraCapture.do")
+	public void cameraCapture(String value, HttpServletResponse response) throws Exception {
+		
+		sensorService.cameraWrite(value);
+		
+		response.setContentType("application/json; charset=UTF-8");
+		JSONObject jsonObj = new JSONObject();
+		jsonObj.put("result", "실행");
+		String json = jsonObj.toString();
+		PrintWriter pw = response.getWriter();
+		pw.write(json);
+		pw.flush();
+		pw.close();
+			
+	
+	}
+	
 	@RequestMapping("/exam04Data.do")
 	public String exam04Data(Model model) {
 		

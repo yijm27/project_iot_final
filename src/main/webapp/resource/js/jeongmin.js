@@ -1,25 +1,22 @@
-$(function(){
+$(function() {
 	var gaugeOptions = {
 		    chart: {
-		    	type: 'solidgauge',
-		        plotBackgroundColor: null,
-		        plotBackgroundImage: null,
-		        plotBorderWidth: 0,
-		        plotShadow: false,
-		        margin: [0,0,0,0]
+		        type: 'solidgauge',
+		        backgroundColor: '#292b2c'
 		    },
 
 		    title: null,
 
 		    pane: {
 		        center: ['50%', '85%'],
-		        size: '100%',
+		        size: '140%',
 		        startAngle: -90,
 		        endAngle: 90,
 		        background: {
-		            backgroundColor: "rgba(0,0,0,0)",
-		            innerRadius: '0%',
-		            outerRadius: '0%',
+		            backgroundColor:
+		                Highcharts.defaultOptions.legend.backgroundColor || '#EEE',
+		            innerRadius: '60%',
+		            outerRadius: '100%',
 		            shape: 'arc'
 		        }
 		    },
@@ -35,7 +32,9 @@ $(function(){
 		    // the value axis
 		    yAxis: {
 		        stops: [
-		            [1, "rgba(0,0,0,0)"],
+		            [0.1, '#55BF3B'], // green
+		            [0.5, '#DDDF0D'], // yellow
+		            [0.9, '#DF5353'] // red
 		        ],
 		        lineWidth: 0,
 		        tickWidth: 0,
@@ -61,12 +60,12 @@ $(function(){
 		};
 
 		// The speed gauge
-		var chartSpeed = Highcharts.chart('speed', Highcharts.merge(gaugeOptions, {
+		var chartSpeed = Highcharts.chart('container-speed', Highcharts.merge(gaugeOptions, {
 		    yAxis: {
 		        min: 'null',
 		        max: 'null',
 		        title: {
-		            text: 'camera up/down'
+		            text: 'Temperture'
 		        }
 		    },
 
@@ -75,29 +74,27 @@ $(function(){
 		    },
 
 		    series: [{
-		        name: 'Speed',
-		        data: [80],
+		        name: 'Temperture',
+		        data: [25],
 		        dataLabels: {
 		            format:
 		                '<div style="text-align:center">' +
-		                '<span style="font-size:100px">{y}</span><br/>' +
-		                '<span style="font-size:12px;opacity:0.4">km/h</span>' +
+		                '<span style="font-size:60px;color:white">{y}</span><br/>' +
+		                '<span style="font-size:12px;opacity:0.4;color:white">온도</span>' +
 		                '</div>'
 		        },
 		        tooltip: {
-		            valueSuffix: ' km/h'
+		            valueSuffix: ' ℃'
 		        }
 		    }]
 
 		}));
-		
-		chartSpeed.reflow();
-		
+
 		// The RPM gauge
-		var chartDistance = Highcharts.chart('distance', Highcharts.merge(gaugeOptions, {
+		var chartRpm = Highcharts.chart('container-rpm', Highcharts.merge(gaugeOptions, {
 		    yAxis: {
-		        min: 0,
-		        max: 5,
+		        min: 'null',
+		        max: 'null',
 		        title: {
 		            text: 'RPM'
 		        }
@@ -121,8 +118,6 @@ $(function(){
 		    }]
 
 		}));
-		
-		chartDistance.reflow();
 
 		// Bring life to the dials
 		setInterval(function () {
@@ -133,14 +128,8 @@ $(function(){
 
 		    if (chartSpeed) {
 		        point = chartSpeed.series[0].points[0];
-		        inc = Math.round((Math.random() - 0.5) * 100);
-		        newVal = point.y + inc;
-
-		        if (newVal < 0 || newVal > 200) {
-		            newVal = point.y - inc;
-		        }
-
-		        point.update(newVal);
+		        
+		        point.update(temperatureValue);
 		    }
 
 		    // RPM
@@ -156,4 +145,4 @@ $(function(){
 		        point.update(newVal);
 		    }
 		}, 2000);
-});
+});	

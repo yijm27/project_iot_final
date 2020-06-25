@@ -17,6 +17,9 @@ $(function() {
                 load: request_temp_Data
             }
         },
+        credits: {
+        	enabled: false
+        },
         title: {
             text: 'Live Temperture data'
         },
@@ -112,6 +115,9 @@ $(function() {
                 load: request_light_Data
             }
         },
+        credits: {
+        	enabled: false
+        },
         title: {
             text: 'Live light data'
         },
@@ -159,6 +165,9 @@ $(function() {
             events: {
                 load: request_gas_Data
             }
+        },
+        credits: {
+        	enabled: false
         },
         title: {
             text: 'gas data'
