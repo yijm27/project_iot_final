@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <!-- document 보고 appenders(로거의 출력 위치) file이나 console이나 등등 -->
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%5p [%c.%M()] %m%n" />
+        </Console>
+    </Appenders>
+    <!-- name안에 패키지 경로주고 그 안에 패키지 or class 만들어주기 -->
+    <Loggers>
+    	<Logger name="com.mycompany.project" level="INFO" additivity="false">
+            <AppenderRef ref="console" />
+        </Logger>
+        <!-- sql문 로깅 -->
+        <Logger name="java.sql" level="INFO" additivity="false">
+            <AppenderRef ref="console" />
+        </Logger>
+        
+        <Logger name="jdbc.sqltiming" level="INFO" additivity="false">
+            <AppenderRef ref="console" />
+        </Logger> 
+       <!--   우리가 원하지 않는 로거 출력 (WAS에서)  
+        <Root level="INFO">
+            <AppenderRef ref="console" />
+        </Root> -->
+    </Loggers>
+</Configuration>
+
