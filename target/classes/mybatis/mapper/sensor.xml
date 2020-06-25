@@ -5,4 +5,10 @@
 		insert into sensor (sdistance, svelocity)
 		values(#{sdistance},#{svelocity})
 	</insert>
+	
+	<insert id="camerainsert" parameterType="String" useGeneratedKeys="true" keyProperty="cno">
+		insert into camera (cblob, cdate)
+		values(#{cameraByte} , now(6))
+	</insert>
+	
 </mapper>

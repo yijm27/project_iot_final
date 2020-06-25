@@ -65,7 +65,7 @@ public class HomeController {
 	
 	@RequestMapping("/cameraCapture.do")
 	public void cameraCapture(String value, HttpServletResponse response) throws Exception {
-		
+		LOGGER.info(value);
 		sensorService.cameraWrite(value);
 		
 		response.setContentType("application/json; charset=UTF-8");
