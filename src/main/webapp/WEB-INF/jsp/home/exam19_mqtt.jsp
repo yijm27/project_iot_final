@@ -270,7 +270,7 @@
 					
 					//$("#cameraView").attr("src", "data:image/jpg;base64," +message.payloadString);
 					$("#cameraView").attr("style","background-image: url(data:image/jpg;base64," + message.payloadString + ");background-repeat: no-repeat;background-size: 100%;"); /* ;background-repeat: no-repeat;background-size: 100%" */
-					
+					cameraCapture = message.payloadString;
 					
 
 				}
@@ -380,8 +380,8 @@
 		
 		<script type="text/javascript"> // 데이터 저장: 이미지 캡처
 			function cameraCapture_database() {
-				console.log("카메라 캡처")
-					cameraCapture = $('#cameraview')
+				
+					console.log("카메라 캡처")
 					console.log(cameraCapture)
 					$.ajax({
 						url: "cameraCapture.do",
