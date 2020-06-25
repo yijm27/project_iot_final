@@ -398,6 +398,70 @@
 		</script>
 		
 		
+<style>		
+		.flip-box {
+  background-color: transparent;
+  width: 200px;
+  height: 12500px;
+  border: 1px solid #f1f1f1;
+  perspective: 1000px;
+}
+
+.flip-box-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flip-box:hover .flip-box-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-box-front, .flip-box-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.flip-box-front {
+  background-color: #bbb;
+  color: black;
+}
+
+.flip-box-back {
+  background-color: dodgerblue;
+  color: white;
+  transform: rotateY(180deg);
+}
+</style>
+<script>
+$(function(){
+Fliporiginal = 1
+Flipflag = 0
+function answer(){
+	if(Flipflag!=Fliporiginal){
+    	$(".flip-box").attr("transform","rotateY(180deg)")
+    }
+
+	}
+})
+</script>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		<script>
 		//키보드 전용 토픽 서보 만들기
 		$(document).keydown(function(event) {
@@ -697,7 +761,7 @@
 					<div class="card bg-dark" style="margin-top: 20px">
 						
 						    <figure class="highcharts-figure">
-							    <div id="container-speed" class="chart-container"></div>
+							    <div id="container-speed" class="chart-container chart_container"></div>
 							    
 							</figure>
 					</div>
@@ -728,17 +792,17 @@
 					        <p style="width:100px" align="center">
 					           LedRed
 					           <input class="btn btn-outline-danger" onclick="ledRedOn()" type="button" value="ledRedOn" />
-					           <input class="btn btn-outline-secondary" onclick="ledRedOff()" type="button" value="ledRedOff" />
+					           
 					           </p>
 					           <p style="width:100px" align="center">
 					         LedGreen           
 					           <input class="btn btn-outline-success" onclick="ledGreenOn()" type="button" value="ledGreenOn" />
-					           <input class="btn btn-outline-secondary" onclick="ledGreenOff()" type="button" value="ledGreenOff" />
+					           
 					           </p>
 					           <p style="width:100px" align="center">
 					           LedBlue
 					           <input class="btn btn-outline-primary" onclick="ledBlueOn()" type="button" value="ledBlueOn" />
-					           <input class="btn btn-outline-secondary" onclick="ledBlueOff()" type="button" value="ledBlueOff" />
+					           
 					           </p>
 					           <p style="width:100px" align="center">
 					           LedOff
@@ -750,20 +814,11 @@
 				</div>
 				<div class="col-sm-3 card bg-dark" >
 					<div class="chart_container" id="light_container" style="margin-top: 20px"></div>
+					<div><p>주행모드 전환 버튼</p></div>
 					<div class="toggleBG text-left">
                       <button id="buttonID" class='toggleFG' onclick="getToggleBtnState('buttonID')"></button>
                  	</div>
-					<div id = "button_state_mode">
-						<div class="button_menual1" style="display: none;">		
-									<p>수동 주행 메뉴얼<p><br>
-									<p>1. 키보드 상하좌우 = 차의 이동</p>	
-						</div>
-						<div class="button_menual2">
-									<p>자율 주행 메뉴얼</p><br>
-									<p>1. 거리가 10 이하가 되면 운행을 중지하고 뒤로 갑니다<br>
-									<p>2. 이후 추가 바람.</p><br>
-						</div>
-					</div>
+					
 				</div>
 				
 				<!-- <div class="col-sm-2 card bg-light">
@@ -802,14 +857,30 @@
                            </div>
                         </div>
                   </div>
-             </div>
+             	</div>
+			</div>
+			
+			
+			
+			<div class="row bg-dark">
+				<div id = "button_state_mode">
+						<div class="button_menual1" style="display: none;">		
+									<p>수동 주행 메뉴얼<p><br>
+									<p>1. 키보드 상하좌우 = 차의 이동</p>	
+						</div>
+						<div class="button_menual2">
+									<p>자율 주행 메뉴얼</p><br>
+									<p>1. 거리가 10 이하가 되면 운행을 중지하고 뒤로 갑니다<br>
+									<p>2. 이후 추가 바람.</p><br>
+						</div>
+					</div>
 			</div>
 		</div>	
 			
 			
 			
 			
-	</div>
+	
 		<!-- <div id="sensordata">
 			<table>
 				<tr>
@@ -848,11 +919,11 @@
 			</table>
 		</div>
 --> 
-		<div>
+		<!-- <div>
 	  		Auto모드 테스트
 	  		<input class="togglebtn" onclick="autoStart()" type="button" value="autoStart" />
 	  		<input class="togglebtn" onclick="autoStop()" type="button" value="autoStop" />
-	  	</div>
+	  	</div> -->
 		
 		 <!-- <div>
 	  		DC모터
@@ -880,7 +951,7 @@
 	  		<input class="togglebtn" onclick="servoTire()" type="button" value="servoTire" />
 	  	</div> -->
 		
-		<div>
+		<!-- <div>
 	  		빵빵
 	  		<input class="togglebtn" onclick="buzzerOn()" type="button" value="buzzerOn" />
 	  		<input class="togglebtn" onclick="buzzerOff()" type="button" value="buzzerOff" />
@@ -902,7 +973,7 @@
 	  		<input class="togglebtn" onclick="ledBlueOff()" type="button" value="ledBlueOff" />
 	  		LedOff
 	  		<input class="togglebtn" onclick="ledOff()" type="button" value="ledOff" />
-	  	</div>
+	  	</div> -->
 
 	</body>
 </html>

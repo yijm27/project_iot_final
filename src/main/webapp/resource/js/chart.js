@@ -83,7 +83,7 @@ $(function() {
             }
         },
         series: [{
-            name: 'Random data',
+            name: 'Temperture data',
             data: []
         }]
     });
@@ -119,7 +119,7 @@ $(function() {
         	enabled: false
         },
         title: {
-            text: 'Live light data'
+            text: 'light data'
         },
         xAxis: {
             type: 'datetime',
