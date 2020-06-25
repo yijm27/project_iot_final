@@ -21,9 +21,19 @@ public class SensorService {
 	}
 	
 	public void cameraWrite(String cameraByte) {
+<<<<<<< HEAD
 		LOGGER.info("실행");
 		System.out.print(cameraByte);
 		sensorDao.insert(cameraByte);
+=======
+		byte[] imagebyte;
+		if(cameraByte.equals("")) {
+			cameraByte = "현재 송출중이 아닙니다.";
+		}
+		
+		imagebyte= cameraByte.getBytes();
+		sensorDao.camerainsert(imagebyte);
+>>>>>>> branch 'master' of https://github.com/yijm27/project_iot_final.git
 	}
 
 	

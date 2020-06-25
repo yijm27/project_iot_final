@@ -17,10 +17,6 @@
 		
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script>
 		
-
-		
-		
-		
 		<%-- <script src="<%=application.getContextPath()%>/resource/highcharts/code/highcharts.js"></script> --%>
 				
 		<script src="<%=application.getContextPath()%>/resource/highcharts/code/themes/gray.js"></script>
@@ -32,17 +28,12 @@
 		<script src="${pageContext.request.contextPath}/resource/js/jeongmin.js"></script>
 		<script src="${pageContext.request.contextPath}/resource/js/toggle_and_hover.js"></script>
 		
-
 		<script src="https://code.highcharts.com/highcharts.js"></script>
 		<script src="https://code.highcharts.com/highcharts-more.js"></script>
 		<script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
 		<script src="https://code.highcharts.com/modules/exporting.js"></script>
 		<script src="https://code.highcharts.com/modules/export-data.js"></script>
 		<script src="https://code.highcharts.com/modules/accessibility.js"></script>
-		
-		
-		
-		
 		
 		 <style type="text/css">
 		    .toggleBG{background: #CCCCCC; width: 70px; height: 30px; border: 1px solid #CCCCCC; border-radius: 15px;}
@@ -106,57 +97,55 @@
          }
          
          .highcharts-figure .chart-container {
-	width: 300px;
-	height: 200px;
-	float: left;
-}
-
-.highcharts-figure, .highcharts-data-table table {
-	width: 600px;
-	margin: 0 auto;
-}
-
-.highcharts-data-table table {
-    font-family: Verdana, sans-serif;
-    border-collapse: collapse;
-    border: 1px solid #EBEBEB;
-    margin: 10px auto;
-    text-align: center;
-    width: 100%;
-    max-width: 500px;
-}
-.highcharts-data-table caption {
-    padding: 1em 0;
-    font-size: 1.2em;
-    color: #555;
-}
-.highcharts-data-table th {
-	font-weight: 600;
-    padding: 0.5em;
-}
-.highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
-    padding: 0.5em;
-}
-.highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
-    background: #f8f8f8;
-}
-.highcharts-data-table tr:hover {
-    background: #f1f7ff;
-}
-
-@media (max-width: 600px) {
-	.highcharts-figure, .highcharts-data-table table {
-		width: 100%;
-	}
-	.highcharts-figure .chart-container {
-		width: 300px;
-		float: none;
-		margin: 0 auto;
-	}
-
-}
-         
-        
+			width: 300px;
+			height: 200px;
+			float: left;
+		}
+		
+		.highcharts-figure, .highcharts-data-table table {
+			width: 600px;
+			margin: 0 auto;
+		}
+		
+		.highcharts-data-table table {
+		    font-family: Verdana, sans-serif;
+		    border-collapse: collapse;
+		    border: 1px solid #EBEBEB;
+		    margin: 10px auto;
+		    text-align: center;
+		    width: 100%;
+		    max-width: 500px;
+		}
+		.highcharts-data-table caption {
+		    padding: 1em 0;
+		    font-size: 1.2em;
+		    color: #555;
+		}
+		.highcharts-data-table th {
+			font-weight: 600;
+		    padding: 0.5em;
+		}
+		.highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
+		    padding: 0.5em;
+		}
+		.highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
+		    background: #f8f8f8;
+		}
+		.highcharts-data-table tr:hover {
+		    background: #f1f7ff;
+		}
+		
+		@media (max-width: 600px) {
+			.highcharts-figure, .highcharts-data-table table {
+				width: 100%;
+			}
+			.highcharts-figure .chart-container {
+				width: 300px;
+				float: none;
+				margin: 0 auto;
+			}
+		
+		}
       </style>
 		<script>
          $(document).keyup(function(event) {
@@ -260,9 +249,7 @@
 				sensorClient.subscribe("/temperature_photo");
 				sensorClient.subscribe("/gas_tracking");
 				sensorClient.subscribe("/ultraSonic");
-				sensorClient.subscribe("/camera");
-				//sensorClient.subscribe("/actuator"); 
-				
+				sensorClient.subscribe("/camera");				
 			}
 			function onMessageArrived(message) {
 				console.log(message.destinationName)
@@ -270,9 +257,13 @@
 					
 					//$("#cameraView").attr("src", "data:image/jpg;base64," +message.payloadString);
 					$("#cameraView").attr("style","background-image: url(data:image/jpg;base64," + message.payloadString + ");background-repeat: no-repeat;background-size: 100%;"); /* ;background-repeat: no-repeat;background-size: 100%" */
+<<<<<<< HEAD
 					
 					
 
+=======
+					cameraCapture = message.payloadString;
+>>>>>>> branch 'master' of https://github.com/yijm27/project_iot_final.git
 				}
 				if(message.destinationName == "/temperature_photo"){
 					//가정  {"temperature": 값, "gas":값}
@@ -282,21 +273,14 @@
 					$("#sensordata #temperature").attr("value", temperatureValue);
 					$("#sensordata #photo").attr("value", photoValue);
 					
-					
-					/* message = new Paho.MQTT.Message("value:photo");
-					message.destinationName = "/sensor2";
-					message.qos = 0;
-					sensorClient.send(message); */
 					function request_temp_Data() {
 						var series = temp_chart.series[0];
 				        var shift = series.data.length > 20;
 					    
 			        	var point = {x:new Date().getTime(), y:temperatureValue}
 			           
-			            temp_chart.series[0].addPoint(point, true, shift);
-			        			        
-					}
-					
+			            temp_chart.series[0].addPoint(point, true, shift);	        			        
+					}			
 				} 
 				if (message.destinationName == "/gas_tracking") {
 					var obj = JSON.parse(message.payloadString);
@@ -306,16 +290,12 @@
 					
 					$("#sensordata #gas").attr("value", gasValue);
 					$("#sensordata #tracking").attr("value", trackingValue);
-					
 				}
 				if (message.destinationName == "/ultraSonic") {
 					var obj = JSON.parse(message.payloadString);
 					ultraSonicValue = obj.ultraSonic;
-					$("#sensordata #ultraSonic").attr("value", ultraSonicValue);
-					
-				}
-				
-						
+					$("#sensordata #ultraSonic").attr("value", ultraSonicValue);					
+				}			
 			}
 		</script>
 			
@@ -380,8 +360,13 @@
 		
 		<script type="text/javascript"> // 데이터 저장: 이미지 캡처
 			function cameraCapture_database() {
+<<<<<<< HEAD
 				console.log("카메라 캡처")
 					cameraCapture = $('#cameraview')
+=======
+				
+					console.log("카메라 캡처")
+>>>>>>> branch 'master' of https://github.com/yijm27/project_iot_final.git
 					console.log(cameraCapture)
 					$.ajax({
 						url: "cameraCapture.do",
@@ -398,6 +383,63 @@
 		</script>
 		
 		
+<<<<<<< HEAD
+=======
+			<style>		
+					.flip-box {
+			  background-color: transparent;
+			  width: 200px;
+			  height: 12500px;
+			  border: 1px solid #f1f1f1;
+			  perspective: 1000px;
+			}
+			
+			.flip-box-inner {
+			  position: relative;
+			  width: 100%;
+			  height: 100%;
+			  text-align: center;
+			  transition: transform 0.8s;
+			  transform-style: preserve-3d;
+			}
+			
+			.flip-box:hover .flip-box-inner {
+			  transform: rotateY(180deg);
+			}
+			
+			.flip-box-front, .flip-box-back {
+			  position: absolute;
+			  width: 100%;
+			  height: 100%;
+			  -webkit-backface-visibility: hidden;
+			  backface-visibility: hidden;
+			}
+			
+			.flip-box-front {
+			  background-color: #bbb;
+			  color: black;
+			}
+			
+			.flip-box-back {
+			  background-color: dodgerblue;
+			  color: white;
+			  transform: rotateY(180deg);
+			}
+			</style>
+			<script>
+			$(function(){
+			Fliporiginal = 1
+			Flipflag = 0
+			function answer(){
+				if(Flipflag!=Fliporiginal){
+			    	$(".flip-box").attr("transform","rotateY(180deg)")
+			    }
+			
+				}
+			})
+			</script>
+		
+>>>>>>> branch 'master' of https://github.com/yijm27/project_iot_final.git
 		<script>
 		//키보드 전용 토픽 서보 만들기
 		$(document).keydown(function(event) {
@@ -449,80 +491,7 @@
 		
 		//***************************************서보 ***************************************************************************		
 		$(document).keydown(function(event) {
-			
-				  /* if (event.keyCode == '37') {
-			  	servo4 -= 1
-			  	
-			  	if (servo4 < 70) {
-			  		servo4 = 70
-			  	}
-			  	console.log("좌")
-				message = new Paho.MQTT.Message("value:"+ servo4);
-				message.destinationName = "/keyboard/servo/servo4/left";
-				message.qos = 0;
-				sensorClient.send(message);
-		  }
-		  
-		if (event.keyCode == '39') {
-			  	servo4 += 1
-			  	if (servo4 > 110) {
-			  		servo4 = 110
-			  	}
-			  	console.log("우")
-				message = new Paho.MQTT.Message("value:"+ servo4);
-				message.destinationName = "/keyboard/servo/servo4/right";
-				message.qos = 0;
-				sensorClient.send(message);
-		}
-
-		//상하ws 좌우ad
-		
-		if (event.keyCode == '87') {
-		  	servo1 += 2
-		  	if (servo1 > 150) {
-		  		servo1 = 150
-		  	}
-		  	console.log("카페라 상")
-			message = new Paho.MQTT.Message("value:"+ servo1);
-			message.destinationName = "/keyboard/servo/servo1/up";
-			message.qos = 0;
-			sensorClient.send(message);
-		}
-		if (event.keyCode == '83') {
-		  	servo1 -= 2
-		  	if (servo1 < 20) {
-		  		servo1 = 20
-		  	}
-		  	console.log("카메라 하")
-			message = new Paho.MQTT.Message("value:"+ servo1);
-			message.destinationName = "/keyboard/servo/servo1/down";
-			message.qos = 0;
-			sensorClient.send(message);
-		}
-		if (event.keyCode == '65') {
-		  	servo2 -= 2
-		  	if (servo2 < 60) {
-		  		servo2 = 60
-		  	}
-		  	console.log("카메라 좌")
-			message = new Paho.MQTT.Message("value:"+ servo2);
-			message.destinationName = "/keyboard/servo/servo2/left";
-			message.qos = 0;
-			sensorClient.send(message);
-		}
-		if (event.keyCode == '68') {
-		  	servo2 += 2
-		  	if (servo2 > 120) {
-		  		servo2 = 120
-		  	}
-		  	console.log("카메라 우")
-			message = new Paho.MQTT.Message("value:"+ servo2);
-			message.destinationName = "/keyboard/servo/servo2/right";
-			message.qos = 0;
-			sensorClient.send(message);
-		}
-		*/
-	
+				
 		if (event.keyCode == '37') {
 			servo4 -= 5
 				
@@ -530,13 +499,9 @@
 		  		servo4 = 70
 		  	}
 		  	console.log(servo4)
-		  	console.log("인터벌 실행")
-
 		}	
 			
-			
-	  
-	  
+  
 		if (event.keyCode == '39') {
 		  	servo4 += 5
 		  	if (servo4 > 110) {
@@ -574,7 +539,6 @@
 		  		servo2 = 40
 		  	}
 		  	
-
 		  	console.log("카메라 좌")
 			
 		}
@@ -607,17 +571,11 @@
 		message.destinationName = "/keyboard/servo/";
 		message.qos = 0;
 		sensorClient.send(message);
-			
-			
-		
+	
 		}); //setInterval 닫힘
 		</script>
-		
 		<script>
-			$(document).keyup(function(event) {
-			  
-				
-			  
+			$(document).keyup(function(event) {			  
 			  if (event.keyCode == '40' && event.keyCode == '38') { //멈춤
 				    speed = 0
 				    console.log("상하 동시 뗌")
@@ -644,16 +602,7 @@
 					message.qos = 0;
 					sensorClient.send(message);
 			  }
-			  
-			  /* if (event.keyCode == '39') { //우측 뗄때
-				    servo4 = 90
-				    console.log("우 키보드 뗌")
-					message = new Paho.MQTT.Message("value:"+ servo4);
-					message.destinationName = "/servo4";
-					message.qos = 0;
-					sensorClient.send(message);
-				  }  */
-			  
+			  			  
 			  if (event.keyCode == '40') { //멈춤
 				    speed = 0
 				    console.log("하 키보드 뗌")
@@ -662,31 +611,12 @@
 					message.qos = 0;
 					sensorClient.send(message);
 			  }
-			  
-			  
-			  
+			  		  
 			  if (event.keyCode == '32') { //스페이스바
 				  buzzerOff()
 			  }
 			});
-		</script>
-		
-		<script type="text/javascript">
-		$("#tracking_window").attr
-		
-		
-		</script>
-		
-		<script>
-			///////////////////////////////////////////////////////////////////////////////////
-		</script>		
-		<!-- <style type="text/css">
-		.wrap { position:relative; /*감싸는 레이어에 포지션 속성을 잡아주는 게 필수!(relative, absolute, fixed 중 택1*/ width:500px; height:500px; background:#F66; text-align:center; line-height:100px; margin:0 auto;  color:#000; font-size:12px; }
-		.over { position:absolute; bottom:0px; right:0px;/*위에 올라가는 레이어의 포지션은 top, bottom 둘 중 하나, left, right 둘 중 하나의 속성을 선택하여 잡아준다.*/ width:300px; height:300px; background:#FFFFCC; text-align:center; line-height:300px;}
-		</style> -->
-
-
-		
+		</script>	
 		
 	</head>
 	<body>
@@ -697,7 +627,7 @@
 					<div class="card bg-dark" style="margin-top: 20px">
 						
 						    <figure class="highcharts-figure">
-							    <div id="container-speed" class="chart-container"></div>
+							    <div id="container-speed" class="chart-container chart_container"></div>
 							    
 							</figure>
 					</div>
@@ -728,17 +658,17 @@
 					        <p style="width:100px" align="center">
 					           LedRed
 					           <input class="btn btn-outline-danger" onclick="ledRedOn()" type="button" value="ledRedOn" />
-					           <input class="btn btn-outline-secondary" onclick="ledRedOff()" type="button" value="ledRedOff" />
+					           
 					           </p>
 					           <p style="width:100px" align="center">
 					         LedGreen           
 					           <input class="btn btn-outline-success" onclick="ledGreenOn()" type="button" value="ledGreenOn" />
-					           <input class="btn btn-outline-secondary" onclick="ledGreenOff()" type="button" value="ledGreenOff" />
+					           
 					           </p>
 					           <p style="width:100px" align="center">
 					           LedBlue
 					           <input class="btn btn-outline-primary" onclick="ledBlueOn()" type="button" value="ledBlueOn" />
-					           <input class="btn btn-outline-secondary" onclick="ledBlueOff()" type="button" value="ledBlueOff" />
+					           
 					           </p>
 					           <p style="width:100px" align="center">
 					           LedOff
@@ -750,30 +680,22 @@
 				</div>
 				<div class="col-sm-3 card bg-dark" >
 					<div class="chart_container" id="light_container" style="margin-top: 20px"></div>
+					<div><p>주행모드 전환 버튼</p></div>
 					<div class="toggleBG text-left">
                       <button id="buttonID" class='toggleFG' onclick="getToggleBtnState('buttonID')"></button>
                  	</div>
-					<div id = "button_state_mode">
-						<div class="button_menual1" style="display: none;">		
-									<p>수동 주행 메뉴얼<p><br>
-									<p>1. 키보드 상하좌우 = 차의 이동</p>	
-						</div>
-						<div class="button_menual2">
-									<p>자율 주행 메뉴얼</p><br>
-									<p>1. 거리가 10 이하가 되면 운행을 중지하고 뒤로 갑니다<br>
-									<p>2. 이후 추가 바람.</p><br>
+					<div class="row bg-dark">
+				<div id = "button_state_mode">
+							<div class="button_menual1" style="display: none;">		
+										<p>수동 주행 중<p><br>
+							</div>
+							<div class="button_menual2">
+										<p>자율 주행 중</p><br>
+							</div>
 						</div>
 					</div>
 				</div>
 				
-				<!-- <div class="col-sm-2 card bg-light">
-					<div class="card bg-light">
-						<div class="chart_container" id="gas_container"></div>
-					</div>
-				</div> -->
-				<!--<div class="col-sm-6 card bg-dark" >
-					<div class="col-sm-12" id="cameraView"></div>
-				</div>-->
 				 <div class="col-sm-6 card bg-dark" >
                		<div class="row"  style="width: 100%; height: 100%;">
                      	<div class="col-sm-12" id="cameraView" style="width: 100%; height: 100%;"></div>
@@ -802,107 +724,8 @@
                            </div>
                         </div>
                   </div>
-             </div>
+             	</div>
 			</div>
 		</div>	
-			
-			
-			
-			
-	</div>
-		<!-- <div id="sensordata">
-			<table>
-				<tr>
-					<th>온도 </th>
-				</tr>
-				<tr>
-					<td><input id="temperature" type="text" value=""/></td>
-				</tr>
-				<tr>
-					<th>포토</th>
-				</tr>
-				<tr>
-					<td><input id="photo" type="text" value=""/></td>
-				</tr>
-				<tr>
-					<th>게스 </th>
-				</tr>
-				<tr>
-					<td><input id="gas" type="text" value=""/></td>
-				</tr>
-				
-				<tr>
-					<th>초음파</th>
-				</tr>
-				<tr>
-					<td><input id="ultraSonic" type="text" value=""/></td>
-				</tr>
-				<tr>
-					<th>트래킹</th>
-				</tr>
-				<tr>
-					<td><input id="tracking" type="text" value=""/></td>
-				</tr>
-				
-				
-			</table>
-		</div>
---> 
-		<div>
-	  		Auto모드 테스트
-	  		<input class="togglebtn" onclick="autoStart()" type="button" value="autoStart" />
-	  		<input class="togglebtn" onclick="autoStop()" type="button" value="autoStop" />
-	  	</div>
-		
-		 <!-- <div>
-	  		DC모터
-	  		<input id="speed" name="speed" type="text" />
-	  		<input class="togglebtn" onclick="publish()" type="button" value="speed" />
-	  	</div> -->
-	  	<!-- <div>
-	  		servoCameraVertical()
-	  		<input id="servoCameraVertical" name="servoCameraVertical" type="text" />
-	  		<input class="togglebtn" onclick="servoCameraVertical()" type="button" value="servoCameraVertical" />
-	  	</div>
-	  	<div>
-	  		servoCameraHorigental()
-	  		<input id="servoCameraHorigental" name="servoCameraHorigental" type="text" />
-	  		<input class="togglebtn" onclick="servoCameraHorigental()" type="button" value="servoCameraHorigental" />
-	  	</div> -->
-	  	<!-- <div>
-	  		servoUltra()
-	  		<input id="servoUltra" name="servoUltra" type="text" />
-	  		<input class="togglebtn" onclick="servoUltra()" type="button" value="servoUltra" />
-	  	</div>
-	  	<div>
-	  		servoTire()
-	  		<input id="servoTire" name="servoTire" type="text" />
-	  		<input class="togglebtn" onclick="servoTire()" type="button" value="servoTire" />
-	  	</div> -->
-		
-		<div>
-	  		빵빵
-	  		<input class="togglebtn" onclick="buzzerOn()" type="button" value="buzzerOn" />
-	  		<input class="togglebtn" onclick="buzzerOff()" type="button" value="buzzerOff" />
-	  	</div>
-	  	<div>
-	  		레이져
-	  		<input class="togglebtn" onclick="laserOn()" type="button" value="laserOn" />
-	  		<input class="togglebtn" onclick="laserOff()" type="button" value="laserOff" />
-	  	</div>
-	  	<div>
-	  		LedRed
-	  		<input class="togglebtn" onclick="ledRedOn()" type="button" value="ledRedOn" />
-	  		<input class="togglebtn" onclick="ledRedOff()" type="button" value="ledRedOff" />
-			LedGreen	  		
-	  		<input class="togglebtn" onclick="ledGreenOn()" type="button" value="ledGreenOn" />
-	  		<input class="togglebtn" onclick="ledGreenOff()" type="button" value="ledGreenOff" />
-	  		LedBlue
-	  		<input class="togglebtn" onclick="ledBlueOn()" type="button" value="ledBlueOn" />
-	  		<input class="togglebtn" onclick="ledBlueOff()" type="button" value="ledBlueOff" />
-	  		LedOff
-	  		<input class="togglebtn" onclick="ledOff()" type="button" value="ledOff" />
-	  	</div>
-
 	</body>
 </html>
