@@ -245,6 +245,9 @@
 			ultraSonicValue = 0;
 			gasValue = 0;
 			trackingValue = 0;
+			cameraCapture="";
+			cameraFlag=  false;
+			
 			//센서 구독자
 			$(function(){
 				sensorClient = new Paho.MQTT.Client(location.hostname, 61614, new Date().getTime().toString());
@@ -264,8 +267,13 @@
 			function onMessageArrived(message) {
 				console.log(message.destinationName)
 				if(message.destinationName == "/camera"){
+					
 					//$("#cameraView").attr("src", "data:image/jpg;base64," +message.payloadString);
 					$("#cameraView").attr("style","background-image: url(data:image/jpg;base64," + message.payloadString + ");background-repeat: no-repeat;background-size: 100%;"); /* ;background-repeat: no-repeat;background-size: 100%" */
+					if(cameraFlag == true){
+					
+						cameraCapture(message.payloadString);
+					}
 				}
 				if(message.destinationName == "/temperature_photo"){
 					//가정  {"temperature": 값, "gas":값}
@@ -370,7 +378,26 @@
 				}, 3000
 			); */
 		</script>
-				
+		
+		<script type="text/javascript"> // 데이터 저장: 이미지 캡처
+			function cameraCapture(camera_message_data) {
+				console.log("카메라 캡처")
+					cameraCapture = camera_message_data;
+					$.ajax({
+						url: "cameraCapture.do",
+					
+						data: {value: cameraCapture},
+					
+						success: function(data) {
+							console.log("실행5");
+						}
+						
+					}); 
+				};
+			
+		</script>
+		
+		
 		
 		<script>
 		//키보드 전용 토픽 서보 만들기
@@ -688,6 +715,12 @@
 					           		레이져
 					           <input class="btn btn-outline-primary" onclick="laserOn()" type="button" value="laserOn" />
 					           <input class="btn btn-outline-secondary" onclick="laserOff()" type="button" value="laserOff" />
+					           </p>
+					        </div>
+					        <div>
+					           <p style="width:100px;" align="center" > 캡처
+					           <input class="btn btn-outline-primary" onclick="ca" type="button" value="buzzerOn" />
+					           
 					           </p>
 					        </div>
 					    </div>

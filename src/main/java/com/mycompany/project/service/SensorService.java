@@ -20,9 +20,9 @@ public class SensorService {
 		sensorDao.insert(sensor);
 	}
 	
-	public void cameraWrite(String value) {
+	public void cameraWrite(String cameraByte) {
 		LOGGER.info("실행");
-		sensorDao.insert(value);
+		sensorDao.insert(cameraByte);
 	}
 
 	
