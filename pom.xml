@@ -139,7 +139,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.31</version>
+            <version>8.0.28</version>
         </dependency>
        	<!-- DB쪽 파일 업로드 라이브러리(아파치 제공 , commons는 db관련) -->
         <dependency>
